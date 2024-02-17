@@ -24,7 +24,7 @@ const Dashboard = () => {
 
   return (
     <>
-         <AlimentosForm />
+      <AlimentosForm/>
       <Metrics />
       <Charts />
       <h5>TO-DO LIST</h5>

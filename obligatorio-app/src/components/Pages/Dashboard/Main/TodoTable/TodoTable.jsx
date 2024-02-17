@@ -48,6 +48,7 @@ import { getRegistors ,getAlimentos} from "../../../../../services/api";
           <th scope="col">#</th>
           <th scope="col">Alimento</th>
           <th scope="col">Cantidad</th>
+          <th scope="col">Calorias</th>
           <th scope="col">Fecha</th>
           <th scope="col">Delete</th>
         </tr>
