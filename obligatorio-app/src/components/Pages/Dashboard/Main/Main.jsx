@@ -1,12 +1,12 @@
 import TodoTable from "./TodoTable";
 import TodoFilter from "./TodoFilter";
-import TodoForm from "./TodoForm";
+import AlimentosForm from "./AlimentosForm";
 
 const Main = () => {
   return (
     <main>
       <div className="grid">
-        <TodoForm />
+        <AlimentosForm />
         <br />
         <TodoFilter />
       </div>

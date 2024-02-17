@@ -7,6 +7,8 @@ import { getTodos } from "../../../services/api";
 import { useSelector, useDispatch } from "react-redux";
 import { onLoadToDos } from "../../../app/slices/todosSlice";
 
+import AlimentosForm from "./Main/AlimentosForm/AlimentosForm";
+
 const Dashboard = () => {
   const userLogged = useSelector((store) => store.userSlice.userLogged);
   const dispatcher = useDispatch();
@@ -22,6 +24,7 @@ const Dashboard = () => {
 
   return (
     <>
+         <AlimentosForm />
       <Metrics />
       <Charts />
       <h5>TO-DO LIST</h5>
