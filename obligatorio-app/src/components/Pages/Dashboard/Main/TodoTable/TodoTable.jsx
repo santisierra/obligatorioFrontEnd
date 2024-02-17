@@ -2,8 +2,32 @@ import { useSelector } from "react-redux";
 import "./TodoTable.css";
 import TodoTableRow from "./TodoTableRow";
 
-const Table = () => {
-  const filteredToDos = useSelector((store) => store.todosSlice.filteredToDos);
+import { useRef, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+
+import { getRegistors } from "../../../../../services/api";
+
+  const Table = () => {
+
+    const userLogged = useSelector((store) => store.userSlice.userLogged);
+
+
+    const [registrosUsuario, setRegistrosUsuario] = useState([]);
+
+    useEffect(() => {
+      getRegistors(userLogged.id, userLogged.apiKey)
+        .then(data => {
+          setRegistrosUsuario(data.registros);
+        })
+        .catch(error => {
+          console.error('Error al obtener los registros:', error);
+        });
+    }, []);
+
+
+
+  //const filteredToDos = useSelector((store) => store.todosSlice.filteredToDos);
   return (
     <table className="table table-hover">
       <thead>
@@ -15,8 +39,8 @@ const Table = () => {
         </tr>
       </thead>
       <tbody>
-        {filteredToDos.map((toDo) => (
-          <TodoTableRow todo={toDo} key={toDo.id} />
+        {registrosUsuario.map((registrosUsuario) => (
+          <TodoTableRow registrosUsuario={registrosUsuario} key={registrosUsuario.id} />
         ))}
       </tbody>
     </table>

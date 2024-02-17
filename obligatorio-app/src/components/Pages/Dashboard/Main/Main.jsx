@@ -6,8 +6,7 @@ const Main = () => {
   return (
     <main>
       <div className="grid">
-        <AlimentosForm />
-        <br />
+
         <TodoFilter />
       </div>
       <br />
@@ -17,3 +16,5 @@ const Main = () => {
 };
 
 export default Main;
+//        <AlimentosForm />
+//<br />

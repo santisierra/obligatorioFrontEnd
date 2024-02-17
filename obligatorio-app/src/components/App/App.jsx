@@ -4,10 +4,10 @@ import Signup from "../Pages/SignUp";
 import Layout from "../Pages/Layout";
 import { useSelector } from "react-redux";
 import { getPaises, getUsuariosPorPais,getRegistors,postAgregarAlimento,eliminarRegistro,getAlimentos } from "../../services/api";
-
+import ContadorNuevoPlan from "../Pages/Dashboard/ContadorNuevoPlan";
 //App principal
 const App = () => {
-
+  
   //console.log(getPaises());
   //console.log(getAlimentos(1085,"71fabc182e6d638d02cd742d4b3867f9"));
   //console.log(getUsuariosPorPais(1085,"14bb18460002bd3e5541d26ab943cd8c"));//pasar id y apikey de usuario loggeado
@@ -17,7 +17,11 @@ const App = () => {
   //Se guarda el usuario al loggearse
   const userLogged = useSelector((store) => store.userSlice.userLogged);
   //Si el usuario esta loggeado ir a layout sino login
-  return <div className="App">{userLogged ? <Layout /> : <Login/> } <Signup/></div>;
+  return <div className="App">{userLogged ? <Layout /> : <Login/> } 
+  
+  <Signup/>
+  <ContadorNuevoPlan/>
+  </div>;
 };
 
 export default App;

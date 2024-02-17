@@ -26,7 +26,6 @@ function AlimentosForm() {
 
   const agregarAlimento = (e) => {
     e.preventDefault();
-    console.log(userLogged.apiKey);
     postAgregarAlimento(alimentoSeleccionado.id, userLogged.id, cantidad, fecha, userLogged.apiKey);
     /*const newTodo = {
       userId: userLogged.id,
@@ -95,7 +94,7 @@ function AlimentosForm() {
           </select>
         </div>
         <div className="col">
-          <label>Cantidad</label>
+          <label className="row">Cantidad</label>
           <input type="number" value={cantidad} onChange={handleCantidadChange} />
         </div>
         <div className="col">
