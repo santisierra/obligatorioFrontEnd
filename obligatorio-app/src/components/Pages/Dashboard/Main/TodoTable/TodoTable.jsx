@@ -6,7 +6,7 @@ import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 
-import { getRegistors } from "../../../../../services/api";
+import { getRegistors ,getAlimentos} from "../../../../../services/api";
 
   const Table = () => {
 
@@ -14,6 +14,8 @@ import { getRegistors } from "../../../../../services/api";
 
 
     const [registrosUsuario, setRegistrosUsuario] = useState([]);
+    const [alimentos, SetAlimentos] = useState([]);
+
 
     useEffect(() => {
       getRegistors(userLogged.id, userLogged.apiKey)
@@ -23,6 +25,17 @@ import { getRegistors } from "../../../../../services/api";
         .catch(error => {
           console.error('Error al obtener los registros:', error);
         });
+
+        getAlimentos(userLogged.id, userLogged.apiKey)
+        .then(data => {
+          const alimentosArray = Object.values(data);
+          SetAlimentos(alimentosArray[1]);
+        })
+        .catch(error => {
+          console.error('Error al obtener los países:', error);
+        });
+        
+
     }, []);
 
 
@@ -33,14 +46,17 @@ import { getRegistors } from "../../../../../services/api";
       <thead>
         <tr>
           <th scope="col">#</th>
-          <th scope="col">Title</th>
-          <th scope="col">Completed</th>
+          <th scope="col">Alimento</th>
+          <th scope="col">Cantidad</th>
+          <th scope="col">Fecha</th>
           <th scope="col">Delete</th>
         </tr>
       </thead>
       <tbody>
         {registrosUsuario.map((registrosUsuario) => (
-          <TodoTableRow registrosUsuario={registrosUsuario} key={registrosUsuario.id} />
+          <TodoTableRow registrosUsuario={registrosUsuario} 
+                        alimentos={alimentos} 
+                        key={registrosUsuario.id} />
         ))}
       </tbody>
     </table>
