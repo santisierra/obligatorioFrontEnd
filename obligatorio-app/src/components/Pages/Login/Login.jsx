@@ -1,17 +1,10 @@
 import { useState } from 'react';
 
-import logo from "./calories_logo.png";
+import logo from "../../calories_logo.png";
 import "./Login.css";
 import LoginForm from "./LoginForm";
-
 //Estructura login
 const Login = () => {
-
-  const [formularioDeshabilitado, setFormularioDeshabilitado] = useState(false);
-
-  const handleNoTienesCuentaClick = () => {
-    setFormularioDeshabilitado(true);
-  };
 
   return (
     <>
@@ -20,9 +13,9 @@ const Login = () => {
           <img src={logo} width="70" height="70" alt="Logo" />
           <h3>Control Calorias</h3>
           <section className="card-body">
-          <LoginForm disabled={formularioDeshabilitado} />
+          <LoginForm />
             <br />
-            <a href="#" onClick={handleNoTienesCuentaClick}>No tienes cuenta?</a>
+            <a href="#">No tienes cuenta?</a>
           </section>
         </div>
       </section>

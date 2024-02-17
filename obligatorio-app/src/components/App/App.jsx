@@ -1,5 +1,6 @@
 import "bootstrap-css-only";
 import Login from "../Pages/Login";
+import Signup from "../Pages/SignUp";
 import Layout from "../Pages/Layout";
 import { useSelector } from "react-redux";
 import { getPaises, getUsuariosPorPais,getRegistors,postAgregarAlimento,eliminarRegistro,getAlimentos } from "../../services/api";
@@ -16,7 +17,7 @@ const App = () => {
   //Se guarda el usuario al loggearse
   const userLogged = useSelector((store) => store.userSlice.userLogged);
   //Si el usuario esta loggeado ir a layout sino login
-  return <div className="App">{userLogged ? <Layout /> : <Login />}</div>;
+  return <div className="App">{userLogged ? <Layout /> : <Login/> } <Signup/></div>;
 };
 
 export default App;
