@@ -1,23 +1,21 @@
 import { useRef } from "react";
 import { useDispatch } from "react-redux";
-import { onFilterToDos } from "../../../../../app/slices/todosSlice";
+import { onFilterRegistros } from "../../../../../app/slices/registrosAlimentosUsuarioSlice";
 
 const TodoFilter = () => {
   const selectRef = useRef();
   const dispatcher = useDispatch();
 
   const _onFilter = () => {
-    dispatcher(onFilterToDos(parseInt(selectRef.current.value)));
+    dispatcher(onFilterRegistros(parseInt(selectRef.current.value)));
   };
   return (
     <div className="g-col-6">
       <div className="input-group">
         <select className="form-control" ref={selectRef} onChange={_onFilter}>
-          <option value={0}>No completados</option>
-          <option value={1}>Completados</option>
-          <option value={2}>
-            Todos
-          </option>
+          <option value={0}>Todos los registos</option>
+          <option value={1}>Semana Anterior</option>
+          <option value={2}>Mes Anterior</option>
         </select>
       </div>
     </div>

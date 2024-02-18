@@ -3,8 +3,8 @@ import { useEffect } from "react";
 
 
 import Button from "../../../../UI/Button/Button";
-import {getAlimentos,postAgregarAlimento } from "../../../../../services/api";
-import { onAddToDo } from "../../../../../app/slices/todosSlice";
+import {postAgregarAlimento } from "../../../../../services/api";
+import { onAddRegistro } from "../../../../../app/slices/registrosAlimentosUsuarioSlice";
 import { useDispatch, useSelector } from "react-redux";
 import {getFechaDesdeHoy} from "../../../../../utils/DatosGenerales"
 
@@ -29,8 +29,6 @@ function AlimentosForm() {
     e.preventDefault();
     if (alimentoSeleccionado !== '' &&cantidad>0&& alimentoSeleccionado !== '0' && (fecha === hoy || fecha === ayer))    
     {
-
-      console.log(alimentoSeleccionado);
       postAgregarAlimento(alimentoSeleccionado, userLogged.id, cantidad, fecha, userLogged.apiKey);
     }
     /*const newTodo = {

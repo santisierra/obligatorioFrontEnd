@@ -16,22 +16,27 @@ export const registrosSlice = createSlice({
     },
     onAddRegistro: (state, action) => {
       const { payload } = action;
-      state.registros = [...state.registrosSlice, payload];
-      state.filteredRegistros = state.registrosSlice;
+      state.registros = [...state.registros, payload];
+      state.filteredRegistros = state.registros;
     },
     onFilterRegistros: (state, action) => {
       const { payload } = action;
       const { registros } = state;
-      /*if (payload === 0) {
-        // No completados
-        state.filteredRegistros = registros.filter((todo) => !todo.completed);
-      } else if (payload === 1) {
-        // Completados
-        state.filteredRegistros = registros.filter((todo) => todo.completed);
-      } else {
-        // Todos
+      if (payload === 0) {
         state.filteredRegistros = registros;
-      }*/
+      } else if (payload === 1) {
+        // semana anterior
+        const semanaAnterior = new Date();
+        semanaAnterior.setDate(semanaAnterior.getDate() - 7);
+        state.filteredRegistros = registros.filter((registro) => new Date(registro.fecha) >= semanaAnterior);
+ 
+      } else {
+        // mes anterior
+        const mesAnterior = new Date();
+        mesAnterior.setMonth(mesAnterior.getMonth() - 1);
+        state.filteredRegistros = registros.filter((registro) => new Date(registro.fecha) >= mesAnterior);
+  
+      }
     },
   },
 });
