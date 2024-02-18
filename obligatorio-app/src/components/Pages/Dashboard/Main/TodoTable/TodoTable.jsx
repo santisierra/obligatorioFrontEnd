@@ -2,45 +2,11 @@ import { useSelector } from "react-redux";
 import "./TodoTable.css";
 import TodoTableRow from "./TodoTableRow";
 
-import { useRef, useState } from "react";
-import { useDispatch } from "react-redux";
-import { useEffect } from "react";
-
-import { getRegistors ,getAlimentos} from "../../../../../services/api";
 
   const Table = () => {
+    const registros = useSelector((state) => state.registrosSlice.registros);
+    const alimentos = useSelector((state) => state.alimetosSlice.alimentos);
 
-    const userLogged = useSelector((store) => store.userSlice.userLogged);
-
-
-    const [registrosUsuario, setRegistrosUsuario] = useState([]);
-    const [alimentos, SetAlimentos] = useState([]);
-
-
-    useEffect(() => {
-      getRegistors(userLogged.id, userLogged.apiKey)
-        .then(data => {
-          setRegistrosUsuario(data.registros);
-        })
-        .catch(error => {
-          console.error('Error al obtener los registros:', error);
-        });
-
-        getAlimentos(userLogged.id, userLogged.apiKey)
-        .then(data => {
-          const alimentosArray = Object.values(data);
-          SetAlimentos(alimentosArray[1]);
-        })
-        .catch(error => {
-          console.error('Error al obtener los países:', error);
-        });
-        
-
-    }, []);
-
-
-
-  //const filteredToDos = useSelector((store) => store.todosSlice.filteredToDos);
   return (
     <table className="table table-hover">
       <thead>
@@ -54,10 +20,10 @@ import { getRegistors ,getAlimentos} from "../../../../../services/api";
         </tr>
       </thead>
       <tbody>
-        {registrosUsuario.map((registrosUsuario) => (
-          <TodoTableRow registrosUsuario={registrosUsuario} 
+        {registros.map((registros) => (
+          <TodoTableRow registros={registros} 
                         alimentos={alimentos} 
-                        key={registrosUsuario.id} />
+                        key={registros.id} />
         ))}
       </tbody>
     </table>

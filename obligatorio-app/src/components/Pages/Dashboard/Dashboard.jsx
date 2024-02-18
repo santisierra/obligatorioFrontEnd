@@ -3,25 +3,39 @@ import Charts from "./Charts";
 import "./Dashboard.css";
 import Main from "./Main";
 import Metrics from "./Metrics/Metrics";
-import { getTodos } from "../../../services/api";
+import { getAlimentos, getRegistors, getTodos } from "../../../services/api";
 import { useSelector, useDispatch } from "react-redux";
-import { onLoadToDos } from "../../../app/slices/todosSlice";
+import { onLoadRegistros } from "../../../app/slices/registrosAlimentosUsuarioSlice";
 import ContadorNuevoPlan from "../Dashboard/ContadorNuevoPlan";
-
+import { onLoadAlimentos } from "../../../app/slices/alimentosSlice";
 import AlimentosForm from "./Main/AlimentosForm/AlimentosForm";
 
 const Dashboard = () => {
   const userLogged = useSelector((store) => store.userSlice.userLogged);
+
+
   const dispatcher = useDispatch();
 
+  //Carga los registros del usuario y los salva en el slice
   useEffect(() => {
-    const { id } = userLogged;
-    getTodos(id)
+    getRegistors(userLogged.id,userLogged.apiKey)
       .then((res) => {
-        dispatcher(onLoadToDos(res));
+        dispatcher(onLoadRegistros(res.registros));
       })
       .catch((e) => {});
   }, [dispatcher, userLogged]);
+//Carga los alimentos al iniciar sesion
+  useEffect(() => {
+    getAlimentos(userLogged.id, userLogged.apiKey)
+      .then((data) => {
+        const alimentosArray = Object.values(data);
+        dispatcher(onLoadAlimentos(alimentosArray[1]));
+      })
+      .catch((error) => {
+        console.error('Error al obtener alimentos:', error);
+      });
+  }, [dispatcher, userLogged]);
+
 
   return (
     <>

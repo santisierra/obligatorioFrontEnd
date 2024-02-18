@@ -10,11 +10,12 @@ import {getFechaDesdeHoy} from "../../../../../utils/DatosGenerales"
 
 
 function AlimentosForm() {
-  const inputToDoRef = useRef();
-  const dispatcher = useDispatch();
+
+  const alimentos = useSelector((state) => state.alimetosSlice.alimentos);
   const userLogged = useSelector((store) => store.userSlice.userLogged);
 
-  const [alimentos, SetAlimentos] = useState([]);
+
+  //const [alimentos, SetAlimentos] = useState([]);
   const [alimentoSeleccionado, setAliemtoSeleccionado] = useState('');
  
   const [hoy, setHoy] = useState('');
@@ -26,8 +27,12 @@ function AlimentosForm() {
 
   const agregarAlimento = (e) => {
     e.preventDefault();
-    console.log(alimentoSeleccionado);
-    postAgregarAlimento(alimentoSeleccionado, userLogged.id, cantidad, fecha, userLogged.apiKey);
+    if (alimentoSeleccionado !== '' &&cantidad>0&& alimentoSeleccionado !== '0' && (fecha === hoy || fecha === ayer))    
+    {
+
+      console.log(alimentoSeleccionado);
+      postAgregarAlimento(alimentoSeleccionado, userLogged.id, cantidad, fecha, userLogged.apiKey);
+    }
     /*const newTodo = {
       userId: userLogged.id,
       title: inputToDoRef.current.value,
@@ -44,25 +49,9 @@ function AlimentosForm() {
 
   useEffect(() => {
     setHoy(getFechaDesdeHoy(0));
-    setAyer(getFechaDesdeHoy(1));
+    setAyer(getFechaDesdeHoy(-1));
   }, []);
 
-  //Carga alimentos al select
-  useEffect(() => {
-
-    // Obtener los alimentos al montar el componente
-    getAlimentos(userLogged.id, userLogged.apiKey)
-      .then(data => {
-        // Convertir el objeto JSON a un array usando Object.values()
-        const alimentosArray = Object.values(data);
-        // Asignar los datos de los alimentos al estado
-        //uso el valor 1 de array por que 0 es el codigo 200 de exito
-        SetAlimentos(alimentosArray[1]);
-      })
-      .catch(error => {
-        console.error('Error al obtener los países:', error);
-      });
-  }, []);
 
   const handleAlimentoChange = (event) => {
     setAliemtoSeleccionado(event.target.value);
@@ -103,16 +92,3 @@ function AlimentosForm() {
 }
 
 export default AlimentosForm;
-
-//<input ref={inputToDoRef} type={"text"} className="form-control" id="todoInput"placeholder="Add todo.." />
-/*   "alimentos": [
-        {
-            "id": 1,
-            "nombre": "Manzana",
-            "calorias": 52,
-            "proteinas": 0.25,
-            "grasas": 0.1700000000000000122124532708767219446599483489990234375,
-            "carbohidratos": 14,
-            "porcion": "100g",
-            "imagen": 7
-        }, */
