@@ -15,10 +15,9 @@ function AlimentosForm() {
 
   const [alimentos, SetAlimentos] = useState([]);
   const [alimentoSeleccionado, setAliemtoSeleccionado] = useState('');
+ 
   const [fecha, setFecha] = useState('');
-  //const fechaAyer = ayer.toISOString().split('T')[0]; // Formato YYYY-MM-D
-  // Establece la fecha máxima como la fecha de hoy
-  const fechaHoy = new Date().toISOString().split('T')[0]; // Formato YYYY-MM-DD
+  const [fechaHoy, setFechaHoy] = useState('');
   const [fechaAyer, setFechaAyer] = useState('');
 
   const [cantidad, setCantidad] = useState('');
@@ -47,14 +46,22 @@ function AlimentosForm() {
   useEffect(() => {
 
 
-    const ayer = new Date();
-    ayer.setDate(ayer.getDate() - 1);
-    const fechaAyer = ayer.toISOString().split('T')[0]; // Formato YYYY-MM-DD
-    setFechaAyer(fechaAyer);
+  // Cálculo de la fecha de ayer
+const ayer = new Date();
+ayer.setDate(ayer.getDate() - 1);
+const diaAyer = ayer.getDate().toString().padStart(2, '0');
+const mesAyer = (ayer.getMonth() + 1).toString().padStart(2, '0');
+const anoAyer = ayer.getFullYear();
+const fechaAyerFormatted = `${anoAyer}-${mesAyer}-${diaAyer}`;
+setFechaAyer(fechaAyerFormatted);
 
-    // Establece la fecha máxima como la fecha de hoy
-    const fechaHoy = new Date().toISOString().split('T')[0]; // Formato YYYY-MM-DD
-    setFecha(fechaHoy);
+// Cálculo de la fecha de hoy
+const hoy = new Date();
+const diaHoy = hoy.getDate().toString().padStart(2, '0');
+const mesHoy = (hoy.getMonth() + 1).toString().padStart(2, '0');
+const anoHoy = hoy.getFullYear();
+const fechaHoyFormatted = `${anoHoy}-${mesHoy}-${diaHoy}`;
+setFechaHoy(fechaHoyFormatted);
 
 
 

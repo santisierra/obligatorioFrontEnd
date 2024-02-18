@@ -21,8 +21,12 @@ const TodoTableRow = ({ registrosUsuario,alimentos }) => {
 
   useEffect(() => {
     let total = 0;
-    const caloriasRegistro = (alimento.calorias * parseFloat(registrosUsuario.cantidad)) / parseFloat(alimento.porcion);
-    total += caloriasRegistro;
+    if(alimento)
+    {
+      const caloriasRegistro = (alimento.calorias * parseFloat(registrosUsuario.cantidad)) / parseFloat(alimento.porcion);
+      total += caloriasRegistro;
+    }
+ 
 
     setCaloriaConsumidas(total);
   }, [registrosUsuario, alimento]);
@@ -33,7 +37,7 @@ const TodoTableRow = ({ registrosUsuario,alimentos }) => {
       <th scope="row">{registrosUsuario.id}</th>
       <td>{alimento ? alimento.nombre : 'Alimento no encontrado'}</td>
       <th scope="row">{registrosUsuario.cantidad+ultimaLetraPorcion}</th>
-      <th scope="row">{caloriaConsumidas}</th>
+
       <th scope="row">{registrosUsuario.fecha}</th>
       
       <td>
@@ -44,3 +48,4 @@ const TodoTableRow = ({ registrosUsuario,alimentos }) => {
 };
 
 export default TodoTableRow;
+//      <th scope="row">{caloriaConsumidas}</th>
