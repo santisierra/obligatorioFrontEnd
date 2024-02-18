@@ -15,7 +15,7 @@ const TodoFilter = () => {
         <select className="form-control" ref={selectRef} onChange={_onFilter}>
           <option value={0}>No completados</option>
           <option value={1}>Completados</option>
-          <option selected value={2}>
+          <option value={2}>
             Todos
           </option>
         </select>

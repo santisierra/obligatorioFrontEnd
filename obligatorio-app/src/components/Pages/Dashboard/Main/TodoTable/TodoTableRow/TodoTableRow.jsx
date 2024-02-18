@@ -37,7 +37,7 @@ const TodoTableRow = ({ registrosUsuario,alimentos }) => {
       <th scope="row">{registrosUsuario.id}</th>
       <td>{alimento ? alimento.nombre : 'Alimento no encontrado'}</td>
       <th scope="row">{registrosUsuario.cantidad+ultimaLetraPorcion}</th>
-
+      <th scope="row">{caloriaConsumidas}</th>
       <th scope="row">{registrosUsuario.fecha}</th>
       
       <td>

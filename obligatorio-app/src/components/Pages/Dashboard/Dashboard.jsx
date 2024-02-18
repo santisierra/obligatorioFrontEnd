@@ -6,6 +6,7 @@ import Metrics from "./Metrics/Metrics";
 import { getTodos } from "../../../services/api";
 import { useSelector, useDispatch } from "react-redux";
 import { onLoadToDos } from "../../../app/slices/todosSlice";
+import ContadorNuevoPlan from "../Dashboard/ContadorNuevoPlan";
 
 import AlimentosForm from "./Main/AlimentosForm/AlimentosForm";
 
@@ -27,7 +28,8 @@ const Dashboard = () => {
       <AlimentosForm/>
       <Metrics />
       <Charts />
-      <h5>TO-DO LIST</h5>
+      <ContadorNuevoPlan />
+      <h5>Registros</h5>
       <div className="card">
         <div className="card-body">
           <Main />

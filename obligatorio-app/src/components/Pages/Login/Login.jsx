@@ -4,7 +4,7 @@ import logo from "../../calories_logo.png";
 import "./Login.css";
 import LoginForm from "./LoginForm";
 //Estructura login
-const Login = () => {
+const Login = ({ toggleSignup }) => {
 
   return (
     <>
@@ -15,7 +15,7 @@ const Login = () => {
           <section className="card-body">
           <LoginForm />
             <br />
-            <a href="#">No tienes cuenta?</a>
+            <a href="#" onClick={toggleSignup}>No tienes cuenta?</a>
           </section>
         </div>
       </section>

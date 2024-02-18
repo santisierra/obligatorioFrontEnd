@@ -2,7 +2,7 @@ import logo from '../../calories_logo.png'
 import './SignUp.css'
 import SignUpForm from './SignUpForm'
 
-const SignUp = () => {
+const SignUp = ({ toggleSignup }) => {
   return (
     <>
       <section className='d-flex flex-md justify-content-center signup'>
@@ -11,8 +11,12 @@ const SignUp = () => {
           <h3>Registro</h3>
           <section className='card-body'>
             <SignUpForm />
+            <br/>
+            <a href="#" onClick={toggleSignup}>Cancelar</a>
           </section>
+         
         </div>
+
       </section>
     </>
   )

@@ -15,7 +15,8 @@ const Metrics = () => {
   
   const [registrosUsuario, setRegistrosUsuario] = useState([]);
   const [alimentos, SetAlimentos] = useState([]);
-  const alimento = alimentos.find(alimento => alimento.id === registrosUsuario.idAlimento);
+  //const alimento = alimentos.find(alimento => alimento.id === registrosUsuario.idAlimento);
+
   useEffect(() => {
     getRegistors(userLogged.id, userLogged.apiKey)
         .then(data => {
@@ -79,7 +80,7 @@ const Metrics = () => {
             <div className="card-body">
               <h5 className="card-title">TOTAL</h5>
               <p className="card-text">
-                <span className="badge bg-secondary">{}</span>
+                <span className="badge bg-secondary">{totalCalorias}</span>
               </p>
             </div>
           </div>
@@ -88,9 +89,9 @@ const Metrics = () => {
         <div className="col-sm">
           <div className="card">
             <div className="card-body">
-              <h5 className="card-title">DIARIAS</h5>
+              <h5 className="card-title">CALORIAS DE HOY</h5>
               <p className="card-text">
-                <span className="badge bg-secondary">{}</span>
+                <span className="badge bg-secondary">{caloriasDiarias}</span>
               </p>
             </div>
           </div>

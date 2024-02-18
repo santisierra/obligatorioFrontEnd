@@ -11,3 +11,7 @@
 .App-header h1 {
   font-size: 24px;
 }
+
+.navbar {
+  height: 100%; /* Asegura que la barra de navegación ocupe toda la altura del header */
+}

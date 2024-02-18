@@ -6,6 +6,7 @@ import Button from "../../../../UI/Button/Button";
 import {getAlimentos,postAgregarAlimento } from "../../../../../services/api";
 import { onAddToDo } from "../../../../../app/slices/todosSlice";
 import { useDispatch, useSelector } from "react-redux";
+import {getFechaDesdeHoy} from "../../../../../utils/DatosGenerales"
 
 
 function AlimentosForm() {
@@ -16,9 +17,9 @@ function AlimentosForm() {
   const [alimentos, SetAlimentos] = useState([]);
   const [alimentoSeleccionado, setAliemtoSeleccionado] = useState('');
  
+  const [hoy, setHoy] = useState('');
+  const [ayer, setAyer] = useState('');
   const [fecha, setFecha] = useState('');
-  const [fechaHoy, setFechaHoy] = useState('');
-  const [fechaAyer, setFechaAyer] = useState('');
 
   const [cantidad, setCantidad] = useState('');
 
@@ -41,29 +42,13 @@ function AlimentosForm() {
      });*/
   };
 
+  useEffect(() => {
+    setHoy(getFechaDesdeHoy(0));
+    setAyer(getFechaDesdeHoy(1));
+  }, []);
 
   //Carga alimentos al select
   useEffect(() => {
-
-
-  // Cálculo de la fecha de ayer
-const ayer = new Date();
-ayer.setDate(ayer.getDate() - 1);
-const diaAyer = ayer.getDate().toString().padStart(2, '0');
-const mesAyer = (ayer.getMonth() + 1).toString().padStart(2, '0');
-const anoAyer = ayer.getFullYear();
-const fechaAyerFormatted = `${anoAyer}-${mesAyer}-${diaAyer}`;
-setFechaAyer(fechaAyerFormatted);
-
-// Cálculo de la fecha de hoy
-const hoy = new Date();
-const diaHoy = hoy.getDate().toString().padStart(2, '0');
-const mesHoy = (hoy.getMonth() + 1).toString().padStart(2, '0');
-const anoHoy = hoy.getFullYear();
-const fechaHoyFormatted = `${anoHoy}-${mesHoy}-${diaHoy}`;
-setFechaHoy(fechaHoyFormatted);
-
-
 
     // Obtener los alimentos al montar el componente
     getAlimentos(userLogged.id, userLogged.apiKey)
@@ -107,7 +92,7 @@ setFechaHoy(fechaHoyFormatted);
         </div>
         <div className="col">
           <label className="row">Fecha</label>
-          <input type="date" min={fechaAyer} max={fechaHoy} value={fecha} onChange={(e) => setFecha(e.target.value)} />
+          <input type="date" min={ayer} max={hoy} value={fecha} onChange={(e) => setFecha(e.target.value)} />
         </div>
         <div className="col-auto">
           <Button cta={"Agregar"} onHandleClick={agregarAlimento}></Button>

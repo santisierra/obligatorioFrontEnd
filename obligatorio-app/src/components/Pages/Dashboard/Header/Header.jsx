@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-import logo from "../../../logo.svg";
+import logo from "../../../calories_logo.png";
 import "./Header.css";
 import NavBar from "./NavBar";
 import Profile from "./Logout";
@@ -15,9 +15,36 @@ const Header = () => {
   };
 
   return (
-    <header className="App-header">
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <button
+    <header className="App-header ">
+      <nav className="navbar navbar-expand-lg navbar-light bg-light ">
+    
+        <div className="container col-9" id="navbarTogglerDemo01">
+          <a className="navbar-brand" href="#">
+            <img
+              src={logo}
+              width="30"
+              height="30"
+              className="d-inline-block align-top"
+              alt=""
+            />
+            Control Calorias
+          </a>
+          <div className="ml-auto">
+          <Profile onLogOut={_onLogOut} />
+          </div>
+          
+        </div>
+      </nav>
+    </header>
+  );
+};
+
+export default Header;
+
+/*     <NavBar />
+
+
+<button
           className="navbar-toggler"
           type="button"
           data-toggle="collapse"
@@ -27,24 +54,4 @@ const Header = () => {
           aria-label="Toggle navigation"
         >
           <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-          <a className="navbar-brand" href="#">
-            <img
-              src={logo}
-              width="30"
-              height="30"
-              className="d-inline-block align-top"
-              alt=""
-            />
-            React to-do app
-          </a>
-          <NavBar />
-          <Profile onLogOut={_onLogOut} />
-        </div>
-      </nav>
-    </header>
-  );
-};
-
-export default Header;
+        </button>*/

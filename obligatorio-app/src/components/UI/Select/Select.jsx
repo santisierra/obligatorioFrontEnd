@@ -10,7 +10,7 @@ const Select = ({ options, onHandleChange }) => {
 
   return (
     <select className='form-control' onChange={_onHandleChange} ref={selectRef}>
-      <option selected value='0'>
+      <option  value='0'>
         Seleccione una opción
       </option>
       {options.map(option => (

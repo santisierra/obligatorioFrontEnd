@@ -3,25 +3,25 @@ import Login from "../Pages/Login";
 import Signup from "../Pages/SignUp";
 import Layout from "../Pages/Layout";
 import { useSelector } from "react-redux";
-import { getPaises, getUsuariosPorPais,getRegistors,postAgregarAlimento,eliminarRegistro,getAlimentos } from "../../services/api";
-import ContadorNuevoPlan from "../Pages/Dashboard/ContadorNuevoPlan";
+import { useState } from 'react';
+
 //App principal
 const App = () => {
-  
-  //console.log(getPaises());
-  //console.log(getAlimentos(1085,"71fabc182e6d638d02cd742d4b3867f9"));
-  //console.log(getUsuariosPorPais(1085,"14bb18460002bd3e5541d26ab943cd8c"));//pasar id y apikey de usuario loggeado
-  //console.log(getRegistors(1085,"14bb18460002bd3e5541d26ab943cd8c"));
-  //console.log(postAgregarAlimento(7,1085,6,"2023-09-21","14bb18460002bd3e5541d26ab943cd8c"));
-  //console.log(eliminarRegistro(2525,1085,"71fabc182e6d638d02cd742d4b3867f9"));
+
+  //cambia pagina login sigup. Se envia la funcion como prop y cambia la variable
+  const [showSignup, setShowSignup] = useState(false);
+  const toggleSignup = () => {
+    setShowSignup(!showSignup);
+  };
   //Se guarda el usuario al loggearse
   const userLogged = useSelector((store) => store.userSlice.userLogged);
   //Si el usuario esta loggeado ir a layout sino login
-  return <div className="App">{userLogged ? <Layout /> : <Login/> } 
-  
-  <Signup/>
-  <ContadorNuevoPlan/>
-  </div>;
+  return <div className="App">
+  {userLogged ? <Layout /> : (
+    showSignup ? <Signup toggleSignup={toggleSignup} /> : <Login toggleSignup={toggleSignup} />
+  )}
+
+</div>
 };
 
 export default App;
