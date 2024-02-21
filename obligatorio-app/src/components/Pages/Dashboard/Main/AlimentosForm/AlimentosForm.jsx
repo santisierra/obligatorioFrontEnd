@@ -13,7 +13,7 @@ function AlimentosForm() {
 
   const alimentos = useSelector((state) => state.alimetosSlice.alimentos);
   const userLogged = useSelector((store) => store.userSlice.userLogged);
-
+  const dispatcher = useDispatch()
 
   //const [alimentos, SetAlimentos] = useState([]);
   const [alimentoSeleccionado, setAliemtoSeleccionado] = useState('');
@@ -29,9 +29,17 @@ function AlimentosForm() {
     e.preventDefault();
     if (alimentoSeleccionado !== '' &&cantidad>0&& alimentoSeleccionado !== '0' && (fecha === hoy || fecha === ayer))    
     {
-      postAgregarAlimento(alimentoSeleccionado, userLogged.id, cantidad, fecha, userLogged.apiKey);
+      postAgregarAlimento(alimentoSeleccionado, userLogged.id, cantidad, fecha, userLogged.apiKey).then(() => {
+        dispatcher(onAddRegistro({
+          "idAlimento": 8,
+          "idUsuario": 7,
+          "cantidad": 200,
+          "fecha": "2023-09-21"
+      }))//actualizar la lista registros
+      }); 
     }
-    /*const newTodo = {
+
+        /*const newTodo = {
       userId: userLogged.id,
       title: inputToDoRef.current.value,
       completed: false,

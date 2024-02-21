@@ -9,6 +9,7 @@ import { onLoadRegistros } from "../../../app/slices/registrosAlimentosUsuarioSl
 import ContadorNuevoPlan from "../Dashboard/ContadorNuevoPlan";
 import { onLoadAlimentos } from "../../../app/slices/alimentosSlice";
 import AlimentosForm from "./Main/AlimentosForm/AlimentosForm";
+import Map from "./Map";
 
 const Dashboard = () => {
   const userLogged = useSelector((store) => store.userSlice.userLogged);
@@ -39,6 +40,7 @@ const Dashboard = () => {
 
   return (
     <>
+
       <AlimentosForm/>
       <Metrics />
       <Charts />
@@ -54,3 +56,4 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+//<Map/>
