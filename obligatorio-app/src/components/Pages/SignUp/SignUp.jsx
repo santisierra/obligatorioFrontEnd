@@ -1,8 +1,18 @@
 import logo from '../../calories_logo.png'
 import './SignUp.css'
 import SignUpForm from './SignUpForm'
+import { useNavigate } from "react-router-dom";
 
 const SignUp = ({ toggleSignup }) => {
+
+  //const dispatcher = useDispatch();
+  const navigator = useNavigate();
+
+  const goToLogin = () => {
+    navigator("/login");//
+   // dispatcher(onLogout());
+  };
+
   return (
     <>
       <section className='d-flex flex-md justify-content-center signup'>
@@ -12,7 +22,7 @@ const SignUp = ({ toggleSignup }) => {
           <section className='card-body'>
             <SignUpForm />
             <br/>
-            <a href="#" onClick={toggleSignup}>Cancelar</a>
+            <a href="#" onClick={goToLogin}>Cancelar</a>
           </section>
          
         </div>

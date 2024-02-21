@@ -9,6 +9,7 @@ const TodoTableRow = ({ registros,alimentos }) => {
   const alimento = alimentos.find(alimento => alimento.id === registros.idAlimento);
   // Obtener la última letra del campo porcion del alimento
   const ultimaLetraPorcion = alimento ? alimento.porcion.slice(-1) : '';
+  const dispatch = useDispatch();
 
   const [caloriaConsumidas, setCaloriaConsumidas] = useState(0);
 
@@ -16,6 +17,17 @@ const TodoTableRow = ({ registros,alimentos }) => {
   const borrarAlimento = (e) => {
     e.preventDefault();
     eliminarRegistro(registros.id, userLogged.id, userLogged.apiKey);
+
+/*
+    eliminarRegistro(registro.id, userLogged.id, userLogged.apiKey)
+      .then(() => {
+        // Actualizar los registros después de eliminar el registro
+        // Aquí podrías hacer una nueva llamada para obtener los registros actualizados del servidor
+        dispatch(onLoadRegistros([])); // Actualiza los registros en Redux
+      })
+      .catch((error) => {
+        console.error('Error al eliminar el registro:', error);
+      });*/
   };
 
   useEffect(() => {

@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import Button from "../../../UI/Button/Button";
 import Alert from "../../../UI/Alert/Alert";
@@ -17,6 +18,7 @@ const LoginForm = () => {
   const [btnDisabled, setBtnDisbled] = useState(true);
 
   const dispatcher = useDispatch();
+  const navigator = useNavigate();
 
   const onHandleLogin = (e) => {
     e.preventDefault();
@@ -32,6 +34,7 @@ const LoginForm = () => {
 
           setTimeout(() => {
             dispatcher(onLogin(res));
+            navigator("/dashboard");//Navega a tal lado
           }, 2000);
         })
         .catch((e) => {

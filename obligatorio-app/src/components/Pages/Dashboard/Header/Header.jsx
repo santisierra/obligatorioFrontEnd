@@ -6,11 +6,15 @@ import NavBar from "./NavBar";
 import Profile from "./Logout";
 import { useDispatch } from "react-redux";
 import { onLogout } from "../../../../app/slices/userSlice";
+import { useNavigate } from "react-router-dom";
+
 
 const Header = () => {
   const dispatcher = useDispatch();
+  const navigator = useNavigate();
 
   const _onLogOut = () => {
+    navigator("/login");//
     dispatcher(onLogout());
   };
 
