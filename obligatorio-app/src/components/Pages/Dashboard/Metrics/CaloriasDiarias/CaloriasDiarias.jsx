@@ -5,6 +5,7 @@ import "../../Metrics/Metrics.css";
 const CaloriasDiarias = () => {
     const alimentos = useSelector((state) => state.alimetosSlice.alimentos);
     const registrosUsuario = useSelector((state) => state.registrosSlice.registros);
+    const userLogged = useSelector((store) => store.userSlice.userLogged);
 
 const [caloriasDiarias, setCaloriasDiarias] = useState(0);
   
@@ -24,13 +25,34 @@ useEffect(() => {
   });
   setCaloriasDiarias(total);
 }, [registrosUsuario, alimentos]);
+
+
+const diezPorciento = userLogged.caloriasDiarias * 0.10;
+const limite = userLogged.caloriasDiarias - diezPorciento;
+
+
+let colorTexto;
+
+switch (true) {
+  case caloriasDiarias > userLogged.caloriasDiarias:
+    colorTexto = 'red';
+    break;
+  case caloriasDiarias > limite:
+    colorTexto = 'yellow';
+    break;
+  default:
+    colorTexto = 'black';
+    break;
+}
+
 return (
     <div className="col-sm">
       <div className="card">
         <div className="card-body">
           <h5 className="card-title">CALORIAS DE HOY</h5>
           <p className="card-text">
-            <span className="badge bg-secondary">{caloriasDiarias}</span>
+          <span style={{ color: colorTexto }}>{caloriasDiarias}</span>
+
           </p>
         </div>
       </div>
@@ -40,6 +62,7 @@ return (
 
 
 
+//<span className="badge bg-secondary">{caloriasDiarias}</span>
 
 
 export default CaloriasDiarias;
