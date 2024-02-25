@@ -27,11 +27,13 @@ function AlimentosForm() {
 
   const agregarAlimento = (e) => {
     e.preventDefault();
-    if (alimentoSeleccionado !== '' &&cantidad>0&& alimentoSeleccionado !== '0' && (fecha === hoy || fecha === ayer))    
+    const idAlimentoSeleccionado = parseInt(alimentoSeleccionado);
+
+    if (alimentoSeleccionado !== '' &&cantidad>0&& idAlimentoSeleccionado !== 0 && (fecha === hoy || fecha === ayer))    
     {
-      postAgregarAlimento(alimentoSeleccionado, userLogged.id, cantidad, fecha, userLogged.apiKey).then(() => {
+      postAgregarAlimento(idAlimentoSeleccionado, userLogged.id, cantidad, fecha, userLogged.apiKey).then(() => {
         dispatcher(onAddRegistro({
-          "idAlimento": alimentoSeleccionado,
+          "idAlimento": idAlimentoSeleccionado,
           "idUsuario": userLogged.id,
           "cantidad": cantidad,
           "fecha": fecha

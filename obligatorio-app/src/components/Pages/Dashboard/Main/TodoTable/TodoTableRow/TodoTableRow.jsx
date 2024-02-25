@@ -37,7 +37,7 @@ const TodoTableRow = ({ registros,alimentos }) => {
 
 
   return (
-    <tr>
+    <tr >
       <th scope="row">{registros.id}</th>
       <td>{alimento ? alimento.nombre : 'Alimento no encontrado'}</td>
       <th scope="row">{registros.cantidad+ultimaLetraPorcion}</th>

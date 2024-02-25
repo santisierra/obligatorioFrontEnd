@@ -1,41 +1,13 @@
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { getRegistors ,getAlimentos} from "../../../../../services/api";
 import "../../Metrics/Metrics.css";
 
 
-const BBBB = () => {
+const TotalCalorias = () => {
+  const alimentos = useSelector((state) => state.alimetosSlice.alimentos);
+  const registrosUsuario = useSelector((state) => state.registrosSlice.registros);
 
-  const userLogged = useSelector((store) => store.userSlice.userLogged);
   const [totalCalorias, setTotalCalorias] = useState(0);
-
-  
-  const [registrosUsuario, setRegistrosUsuario] = useState([]);
-  const [alimentos, SetAlimentos] = useState([]);
-
-  const alimento = alimentos.find(alimento => alimento.id === registrosUsuario.idAlimento);
-
-  useEffect(() => {
-
-    getRegistors(userLogged.id, userLogged.apiKey)
-        .then(data => {
-          setRegistrosUsuario(data.registros);
-        })
-        .catch(error => {
-          console.error('Error al obtener los registros:', error);
-        });
-
-        getAlimentos(userLogged.id, userLogged.apiKey)
-        .then(data => {
-          const alimentosArray = Object.values(data);
-          SetAlimentos(alimentosArray[1]);
-        })
-        .catch(error => {
-          console.error('Error al obtener los países:', error);
-        });
-            
-  }, []); // El array vacío asegura que useEffect se ejecute solo una vez al montar el componente
-
 
   useEffect(() => {
     let total = 0;
@@ -50,7 +22,7 @@ const BBBB = () => {
     });
   
     setTotalCalorias(total);
-  }, [registrosUsuario, alimentos]);
+  }, [registrosUsuario,alimentos]);
 
 
 
@@ -68,4 +40,4 @@ const BBBB = () => {
   );
 };
 
-export default BBBB;
+export default TotalCalorias;

@@ -1,2 +1,2 @@
-import BBBB from './TotalCalorias';
-export default BBBB;
+import TotalCalorias from './TotalCalorias';
+export default TotalCalorias;

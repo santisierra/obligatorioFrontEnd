@@ -23,14 +23,14 @@ export const registrosSlice = createSlice({
       const { payload } = action;
       state.registros = [...state.registros, payload];
       state.filteredRegistros = state.registros;
-      state.registrosUltimaSemana = filtrarRegistrosUltimaSemana(payload);
+  //    state.registrosUltimaSemana = filtrarRegistrosUltimaSemana(payload);
 
     },
     onRemoveRegistro: (state, action) => {
       const { payload } = action;
       state.registros = state.registros.filter(registro => registro.id !== payload.idRegistro);
       state.filteredRegistros = state.registros;
-      state.registrosUltimaSemana = filtrarRegistrosUltimaSemana(state.registros);
+      state.registrosUltimaSemana = state.registrosUltimaSemana.filter(registro => registro.id !== payload.idRegistro);
 
     },
     
@@ -56,9 +56,14 @@ export const registrosSlice = createSlice({
 
 // Función para filtrar los registros de la última semana
 const filtrarRegistrosUltimaSemana = (registros) => {
-  const unaSemanaAtras = new Date();
-  unaSemanaAtras.setDate(unaSemanaAtras.getDate() - 7);
-  return registros.filter((registro) => new Date(registro.fecha) >= unaSemanaAtras);
+  if (Array.isArray(registros)) {
+    const unaSemanaAtras = new Date();
+    unaSemanaAtras.setDate(unaSemanaAtras.getDate() - 7);
+    return registros.filter((registro) => new Date(registro.fecha) >= unaSemanaAtras);
+  } else {
+    // Si registros no es un array, devolver un array vacío o manejar el caso según tu lógica
+    return [];
+  }
 };
 
 
