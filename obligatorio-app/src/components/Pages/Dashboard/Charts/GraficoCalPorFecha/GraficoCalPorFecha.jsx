@@ -1,11 +1,14 @@
 import ReactApexChart from "react-apexcharts";
 
 
-const Bar = ({ data }) => {
+const CalsPorFecha = ({ data }) => {
     const options = {
       chart: {
-        type: 'bar',
-        height: 350
+        type: 'line',
+        height: 350,
+        zoom: {
+            enabled: false
+          }
       },
       plotOptions: {
         bar: {
@@ -16,16 +19,24 @@ const Bar = ({ data }) => {
       dataLabels: {
         enabled: false
       },
+      stroke: {
+        curve: 'straight'
+      },
+      grid: {
+        row: {
+          colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+          opacity: 0.5
+        },
+      },
       xaxis: {
-        categories: data.map(item => item.nombre),
+        categories: data.map(item => item.fecha),
+      },
+      yaxis: {
         labels: {
             formatter: function(val) {
                 return val.toFixed(0);
               }
             },
-        stepSize: 1
-
-
       },
       tooltip: {
         y: {
@@ -37,14 +48,15 @@ const Bar = ({ data }) => {
 }
   
     const series = [{
-      data: data.map(item => item.vecesConsumido)
+      data: data.map(item => item.calorias)
+      
     }];
   
     return (
       <div>
-        <ReactApexChart options={options} series={series} type="bar" height={350} />
+        <ReactApexChart options={options} series={series} type="line" height={350} />
       </div>
     );
   };
   
-  export default Bar;
+  export default CalsPorFecha;

@@ -31,10 +31,10 @@ function AlimentosForm() {
     {
       postAgregarAlimento(alimentoSeleccionado, userLogged.id, cantidad, fecha, userLogged.apiKey).then(() => {
         dispatcher(onAddRegistro({
-          "idAlimento": 8,
-          "idUsuario": 7,
-          "cantidad": 200,
-          "fecha": "2023-09-21"
+          "idAlimento": alimentoSeleccionado,
+          "idUsuario": userLogged.id,
+          "cantidad": cantidad,
+          "fecha": fecha
       }))//actualizar la lista registros
       }); 
     }
