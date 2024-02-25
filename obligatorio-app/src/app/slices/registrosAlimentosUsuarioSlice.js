@@ -40,15 +40,9 @@ export const registrosSlice = createSlice({
       if (payload === 0) {
         state.filteredRegistros = registros;
       } else if (payload === 1) {
-
         state.filteredRegistros = filtrarRegistrosUltimaSemana(registros);
- 
-      } else {
-        // mes anterior
-        const mesAnterior = new Date();
-        mesAnterior.setMonth(mesAnterior.getMonth() - 1);
-        state.filteredRegistros = registros.filter((registro) => new Date(registro.fecha) >= mesAnterior);
-        
+      } else if (payload === 2){
+        state.filteredRegistros = filtrarRegistrosUltimoMes(registros);
       }
     },
   },
@@ -57,11 +51,44 @@ export const registrosSlice = createSlice({
 // Función para filtrar los registros de la última semana
 const filtrarRegistrosUltimaSemana = (registros) => {
   if (Array.isArray(registros)) {
+
     const unaSemanaAtras = new Date();
     unaSemanaAtras.setDate(unaSemanaAtras.getDate() - 7);
-    return registros.filter((registro) => new Date(registro.fecha) >= unaSemanaAtras);
+    const registrosFiltrados = registros.filter((registro) => new Date(registro.fecha) >= unaSemanaAtras);
+    return registrosFiltrados;
+
   } else {
     // Si registros no es un array, devolver un array vacío o manejar el caso según tu lógica
+    return [];
+  }
+};
+
+const filtrarRegistrosUltimoMes = (registros) => {
+  if (Array.isArray(registros)) {
+    const hoy = new Date();
+    let lastYear = hoy.getFullYear();
+    let lastMonth = hoy.getMonth();
+
+    // Manejar el caso especial de enero
+    if (lastMonth === 0) {
+      lastMonth = 11; // Diciembre del año anterior
+      lastYear--;     // Año anterior
+    } else {
+      lastMonth--;    // Mes anterior
+    }
+
+    // Calcular el primer día del mes actual y del mes anterior
+    const primerDiaMesActual = new Date(hoy.getFullYear(), hoy.getMonth(), 1);
+    const primerDiaMesAnterior = new Date(lastYear, lastMonth, 1);
+
+    // Filtrar los registros para el mes anterior
+    const registrosFiltrados = registros.filter((registro) => {
+      const fechaRegistro = new Date(registro.fecha);
+      return fechaRegistro >= primerDiaMesAnterior && fechaRegistro < primerDiaMesActual;
+    });
+
+    return registrosFiltrados;
+  } else {
     return [];
   }
 };
