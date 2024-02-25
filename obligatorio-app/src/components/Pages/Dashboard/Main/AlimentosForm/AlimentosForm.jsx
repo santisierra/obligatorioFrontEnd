@@ -25,14 +25,18 @@ function AlimentosForm() {
   const [cantidad, setCantidad] = useState('');
 
 
+
+
   const agregarAlimento = (e) => {
     e.preventDefault();
     const idAlimentoSeleccionado = parseInt(alimentoSeleccionado);
 
     if (alimentoSeleccionado !== '' &&cantidad>0&& idAlimentoSeleccionado !== 0 && (fecha === hoy || fecha === ayer))    
     {
-      postAgregarAlimento(idAlimentoSeleccionado, userLogged.id, cantidad, fecha, userLogged.apiKey).then(() => {
+      postAgregarAlimento(idAlimentoSeleccionado, userLogged.id, cantidad, fecha, userLogged.apiKey).then((response) => {
+        console.log(response.idRegistro);
         dispatcher(onAddRegistro({
+          "id": response.idRegistro,
           "idAlimento": idAlimentoSeleccionado,
           "idUsuario": userLogged.id,
           "cantidad": cantidad,
@@ -41,18 +45,6 @@ function AlimentosForm() {
       }); 
     }
 
-        /*const newTodo = {
-      userId: userLogged.id,
-      title: inputToDoRef.current.value,
-      completed: false,
-    };*/
-    // ESTO ES FAKE!!! USTEDES LO TIENEN QUE HACER DE VERDAD!!
-    /* saveToDo(newTodo).then(({ codigo, id }) => {
-       if (codigo === 200) {
-         newTodo.id = id;
-         dispatcher(onAddToDo(newTodo));
-       }
-     });*/
   };
 
   useEffect(() => {

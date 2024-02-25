@@ -6,7 +6,7 @@ const initialState = {
   registrosUltimaSemana: [],
   caloriasPorDia: {}, // Objeto para almacenar las calorías consumidas por día
 
-};
+}; 
 
 export const registrosSlice = createSlice({
   name: "registrosSlice",
@@ -29,7 +29,7 @@ export const registrosSlice = createSlice({
     onRemoveRegistro: (state, action) => {
       const { payload } = action;
       state.registros = state.registros.filter(registro => registro.id !== payload.idRegistro);
-      state.filteredRegistros = state.registros;
+      state.filteredRegistros = state.filteredRegistros.filter(registro => registro.id !== payload.idRegistro);
       state.registrosUltimaSemana = state.registrosUltimaSemana.filter(registro => registro.id !== payload.idRegistro);
 
     },

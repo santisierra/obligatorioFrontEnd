@@ -4,9 +4,14 @@ import TodoTableRow from "./TodoTableRow";
 
 
   const Table = () => {
-    const registros = useSelector((state) => state.registrosSlice.registros);
+    //const registros = useSelector((state) => state.registrosSlice.registros);
     const alimentos = useSelector((state) => state.alimetosSlice.alimentos);
 
+    const filteredToDos = useSelector((store) => store.registrosSlice.filteredRegistros);
+
+    console.log('Claves de los registros:', filteredToDos.map(registro => registro.id));
+
+    
   return (
     <table className="table table-hover">
       <thead>
@@ -20,13 +25,17 @@ import TodoTableRow from "./TodoTableRow";
         </tr>
       </thead>
       <tbody>
-        {registros.map((registros) => (
-          <TodoTableRow registros={registros} 
-                        alimentos={alimentos} 
-                        key={registros.id} />
+      {filteredToDos.map((registros) => (
+      <TodoTableRow registros={registros} 
+                    alimentos={alimentos}
+                    key={registros.id}/>
         ))}
       </tbody>
     </table>
   );
 };
 export default Table;
+/*{registros.map((registros) => (
+  <TodoTableRow registros={registros} 
+                alimentos={alimentos} 
+                key={registros.id}*/
