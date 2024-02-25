@@ -2,6 +2,7 @@ import Button from "../../../../../UI/Button/Button";
 import {eliminarRegistro } from "../../../../../../services/api";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { onRemoveRegistro } from "../../../../../../app/slices/registrosAlimentosUsuarioSlice";
 
 
 const TodoTableRow = ({ registros,alimentos }) => {
@@ -11,11 +12,16 @@ const TodoTableRow = ({ registros,alimentos }) => {
   const ultimaLetraPorcion = alimento ? alimento.porcion.slice(-1) : '';
 
   const [caloriaConsumidas, setCaloriaConsumidas] = useState(0);
+  const dispatcher = useDispatch()
 
 
   const borrarAlimento = (e) => {
     e.preventDefault();
-    eliminarRegistro(registros.id, userLogged.id, userLogged.apiKey);
+    eliminarRegistro(registros.id, userLogged.id, userLogged.apiKey).then(()=>{
+      dispatcher(onRemoveRegistro({
+        "idRegistro": registros.id,
+      }))
+    });
   };
 
   useEffect(() => {

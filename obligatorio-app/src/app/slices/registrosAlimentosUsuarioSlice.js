@@ -26,6 +26,14 @@ export const registrosSlice = createSlice({
       state.registrosUltimaSemana = filtrarRegistrosUltimaSemana(payload);
 
     },
+    onRemoveRegistro: (state, action) => {
+      const { payload } = action;
+      state.registros = state.registros.filter(registro => registro.id !== payload.idRegistro);
+      state.filteredRegistros = state.registros;
+      state.registrosUltimaSemana = filtrarRegistrosUltimaSemana(state.registros);
+
+    },
+    
     onFilterRegistros: (state, action) => {
       const { payload } = action;
       const { registros } = state;
@@ -54,5 +62,5 @@ const filtrarRegistrosUltimaSemana = (registros) => {
 };
 
 
-export const { onLoadRegistros, onAddRegistro, onFilterRegistros } = registrosSlice.actions;
+export const { onLoadRegistros, onAddRegistro, onFilterRegistros, onRemoveRegistro } = registrosSlice.actions;
 export default registrosSlice.reducer;
