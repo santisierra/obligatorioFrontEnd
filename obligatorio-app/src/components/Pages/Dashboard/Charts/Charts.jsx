@@ -25,25 +25,38 @@ const Charts = () => {
   filter(alimento => alimento.vecesConsumido > 0);
 
 
-// Cálculo de las calorías por fecha de la última semana
-const caloriasPorFechaUltimaSemana = registrosUltimaSemana.reduce((caloriasPorFecha, registro) => {
-  const alimento = alimentos.find((al) => al.id === registro.idAlimento);
-  if (alimento) {
-      const fecha = registro.fecha.split("T")[0];
-      const caloriasRegistro = (alimento.calorias * parseFloat(registro.cantidad)) / parseFloat(alimento.porcion);
-      
-      // Verificar si la fecha ya existe en el array
-      const existingIndex = caloriasPorFecha.findIndex(item => item.fecha === fecha);
-      if (existingIndex !== -1) {
-          // Si la fecha ya existe, sumar las calorías al elemento existente
-          caloriasPorFecha[existingIndex].calorias += caloriasRegistro;
-      } else {
-          // Si la fecha no existe, agregar un nuevo objeto al array
-          caloriasPorFecha.push({ fecha: fecha, calorias: caloriasRegistro });
-      }
-  }
-  return caloriasPorFecha;
-}, []);
+// Obtener la fecha de hoy
+const today = new Date();
+
+// Generar un array de fechas para los últimos 7 días
+const lastWeekDates = [];
+for (let i = 6; i >= 0; i--) {
+    const date = new Date(today);
+    date.setDate(today.getDate() - i);
+    lastWeekDates.push(date.toISOString().split('T')[0]);
+}
+
+// Mapa para almacenar las calorías por fecha de la última semana
+const caloriasPorFechaUltimaSemanaMap = new Map();
+
+// Inicializar el mapa con 0 calorías para cada fecha
+lastWeekDates.forEach(date => {
+    caloriasPorFechaUltimaSemanaMap.set(date, 0);
+});
+
+// Calcular las calorías por fecha de la última semana
+registrosUltimaSemana.forEach(registro => {
+    const alimento = alimentos.find(al => al.id === registro.idAlimento);
+    if (alimento) {
+        const fecha = registro.fecha.split("T")[0];
+        const caloriasRegistro = (alimento.calorias * parseFloat(registro.cantidad)) / parseFloat(alimento.porcion);
+        // Sumar las calorías al valor existente en el mapa
+        caloriasPorFechaUltimaSemanaMap.set(fecha, caloriasPorFechaUltimaSemanaMap.get(fecha) + caloriasRegistro);
+    }
+});
+
+// Convertir el mapa a un array de objetos
+const caloriasPorFechaUltimaSemana = Array.from(caloriasPorFechaUltimaSemanaMap, ([fecha, calorias]) => ({ fecha, calorias }));
 
 
   return (

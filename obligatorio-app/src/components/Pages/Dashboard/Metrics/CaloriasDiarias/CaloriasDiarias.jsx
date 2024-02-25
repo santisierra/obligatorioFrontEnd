@@ -41,7 +41,7 @@ switch (true) {
     colorTexto = 'yellow';
     break;
   default:
-    colorTexto = 'black';
+    colorTexto = 'green';
     break;
 }
 
