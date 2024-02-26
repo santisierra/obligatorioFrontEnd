@@ -44,6 +44,7 @@ const Dashboard = () => {
       <AlimentosForm/>
       <Metrics />
       <Charts />
+      <Map/>
       <ContadorNuevoPlan />
       <h5>Registros</h5>
       <div className="card">
@@ -56,4 +57,4 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-//<Map/>
+//

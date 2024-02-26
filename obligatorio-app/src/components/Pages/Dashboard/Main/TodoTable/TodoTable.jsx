@@ -9,8 +9,6 @@ import TodoTableRow from "./TodoTableRow";
 
     const filteredToDos = useSelector((store) => store.registrosSlice.filteredRegistros);
 
-    console.log('Claves de los registros:', filteredToDos.map(registro => registro.id));
-
     
   return (
     <table className="table table-hover">
