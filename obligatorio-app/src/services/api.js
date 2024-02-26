@@ -78,11 +78,12 @@ const registroUsuario = (userName, password, idPais, calorias) => {
     body: JSON.stringify({
       usuario: userName,
       password: password,
-      idPais: idPais,
-      caloriasDiarias: calorias
+      idPais: parseInt(idPais),
+      caloriasDiarias: parseInt(calorias)
     }),
   })
     .then((response) => {
+      console.log(response)
       if (response.status === 200) {
         return response.json();
       } else {

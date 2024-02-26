@@ -1,6 +1,9 @@
 import { useRef, useState } from "react";
-import { useDispatch } from "react-redux";
 import { useEffect } from "react";
+import { registroUsuario } from "../../../../services/api";//importa el POST login
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { onLogin } from "../../../../app/slices/userSlice";//importa slide log in (la pagina del usuario)
 
 
 import Button from "../../../UI/Button/Button";
@@ -9,6 +12,15 @@ const SignUpForm = () => {
 
   const [paises, setPaises] = useState([]);
   const [paisSeleccionado, setPaisSeleccionado] = useState('');
+  
+  
+  const inputUserNameRef = useRef();
+  const inputPassRef = useRef();
+  const caloriasRef = useRef();
+  const paisSeleccionadoRef = useRef();
+
+  const dispatcher = useDispatch();
+  const navigator = useNavigate();
 
   useEffect(() => {
     // Obtener los países al montar el componente
@@ -29,20 +41,48 @@ const SignUpForm = () => {
     setPaisSeleccionado(event.target.value);
   };
 
+  const _onHandleRegister = (e) => {
+    e.preventDefault()
+    const inputName = inputUserNameRef.current.value;
+    const inputPass = inputPassRef.current.value;
+    const inputPais = paisSeleccionadoRef.current.value;
+    const inputCal = caloriasRef.current.value;
+    console.log(inputCal);
+    if (inputName == "" || inputPass == "" || inputPais==""||inputCal=="") {
+      alert("Por favor completar los campos"); // TODO
+    } else {
+      registroUsuario(inputName, inputPass,inputPais,inputCal)
+        .then((res) => {
+          //setMessage("Inicio de sesion correcto");
+          //setMessageColor("success");
+
+          setTimeout(() => {
+            dispatcher(onLogin(res));
+            navigator("/dashboard");//Navega a tal lado
+          }, 2000);
+        })
+        .catch((e) => {
+          //setMessage(e.message);
+          //setMessageColor("danger");
+        });
+    }
+
+  }
+
   return (
     <>
       <form>
         <label>Username</label>
         <br />
-        <input className="form-control" type="text" />
+        <input className="form-control" type="text" ref={inputUserNameRef} />
         <br />
         <label>Password</label>
         <br />
-        <input className="form-control" type="password" />
+        <input className="form-control" type="password" ref={inputPassRef}/>
         <br />
         <label>Pais</label>
         <br />
-        <select className="form-control" value={paisSeleccionado} onChange={handlePaisChange}>
+        <select className="form-control" ref={paisSeleccionadoRef} value={paisSeleccionado} onChange={handlePaisChange}>
           <option key="0" value="">Selecciona un país</option>
           {paises.map(pais => (
             <option key={pais.id} value={pais.id}>{pais.name}</option>
@@ -51,9 +91,9 @@ const SignUpForm = () => {
         <br />
         <label>Calorias</label>
         <br />
-        <input className="form-control" type="number" min="1" />
+        <input className="form-control" type="number" min="1" ref={caloriasRef} />
         <br />
-        <Button cta={"Sign Up"} classColor={"btn-primary"} />
+        <Button cta={"Sign Up"} classColor={"btn-primary"}  onHandleClick={_onHandleRegister}/>
       </form>
     </>
   );
