@@ -5,7 +5,7 @@ const Layout = () => {
   return (
     <div className="container-fluid dashboard">
       <Header />
-      <div className="col-9 mx-auto">
+      <div className="col-10 mx-auto">
         <Dashboard />
       </div>
     </div>

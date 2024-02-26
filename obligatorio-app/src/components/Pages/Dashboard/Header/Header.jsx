@@ -19,7 +19,7 @@ const Header = () => {
   };
 
   return (
-    <header className="App-header ">
+    <header className="App-header "style={{ marginBottom: "40px" }}>
       <nav className="navbar navbar-expand-lg navbar-light bg-light ">
     
         <div className="container col-9" id="navbarTogglerDemo01">

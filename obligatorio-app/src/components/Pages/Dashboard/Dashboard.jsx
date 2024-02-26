@@ -40,18 +40,21 @@ const Dashboard = () => {
 
   return (
     <>
-
+      <ContadorNuevoPlan />
       <AlimentosForm/>
       <Metrics />
       <Charts />
       <Map/>
-      <ContadorNuevoPlan />
-      <h5>Registros</h5>
-      <div className="card">
-        <div className="card-body">
-          <Main />
+      <div style={{padding: '20px' }}>
+
+        <h5>Registros</h5>
+        <div className="card" >
+          <div className="card-body">
+            <Main />
+          </div>
         </div>
       </div>
+      
     </>
   );
 };

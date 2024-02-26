@@ -23,6 +23,7 @@ function AlimentosForm() {
   const [fecha, setFecha] = useState('');
 
   const [cantidad, setCantidad] = useState('');
+  const [ultimaLetraPorcion, SetUnidadSeleccionbado] = useState('');
 
 
 
@@ -30,16 +31,19 @@ function AlimentosForm() {
   const agregarAlimento = (e) => {
     e.preventDefault();
     const idAlimentoSeleccionado = parseInt(alimentoSeleccionado);
-
     if (alimentoSeleccionado !== '' &&cantidad>0&& idAlimentoSeleccionado !== 0 && (fecha === hoy || fecha === ayer))    
     {
-      postAgregarAlimento(idAlimentoSeleccionado, userLogged.id, cantidad, fecha, userLogged.apiKey).then((response) => {
-        console.log(response.idRegistro);
+      const cant = parseFloat(cantidad);
+      //si el alimento es en unidades se transforma a un valor entero
+      const cantidadTransformada = ultimaLetraPorcion === 'u' ? Math.floor(cant) : cant.toFixed(2);
+
+      postAgregarAlimento(idAlimentoSeleccionado, userLogged.id, cantidadTransformada, fecha, userLogged.apiKey).then((response) => {
+       
         dispatcher(onAddRegistro({
           "id": response.idRegistro,
           "idAlimento": idAlimentoSeleccionado,
           "idUsuario": userLogged.id,
-          "cantidad": cantidad,
+          "cantidad": cantidadTransformada,
           "fecha": fecha
       }))//actualizar la lista registros
       }); 
@@ -55,6 +59,8 @@ function AlimentosForm() {
 
   const handleAlimentoChange = (event) => {
     setAliemtoSeleccionado(event.target.value);
+    const alimento = alimentos.find(alimento => alimento.id === parseInt(event.target.value));
+    SetUnidadSeleccionbado ( alimento ? alimento.porcion.slice(-1) : '');
   };
 
   const handleCantidadChange = (event) => {
@@ -64,8 +70,10 @@ function AlimentosForm() {
 
 
   return (
-    <div className="g-col-6">
-      <form className="row">
+
+    <div className="col-auto align-items-center" style={{ padding: '20px' }}>
+      <h2 className="text-start mb-5">Ingresar Alimento</h2>
+      <form className="row align-items-center ">
         <div className="col">
           <label>Alimento</label>
           <select className="form-control" value={alimentoSeleccionado} onChange={handleAlimentoChange}>
@@ -76,14 +84,14 @@ function AlimentosForm() {
           </select>
         </div>
         <div className="col">
-          <label className="row">Cantidad</label>
-          <input type="number" value={cantidad} onChange={handleCantidadChange} />
+          <label>Cantidad</label>
+          <input className="form-control" type="number" value={cantidad} onChange={handleCantidadChange} />
         </div>
         <div className="col">
-          <label className="row">Fecha</label>
-          <input type="date" min={ayer} max={hoy} value={fecha} onChange={(e) => setFecha(e.target.value)} />
+          <label className="col-12">Fecha</label>
+          <input className="form-control" type="date" min={ayer} max={hoy} value={fecha} onChange={(e) => setFecha(e.target.value)} />
         </div>
-        <div className="col-auto">
+        <div className="col-auto mt-auto">
           <Button cta={"Agregar"} onHandleClick={agregarAlimento}></Button>
         </div>
       </form>

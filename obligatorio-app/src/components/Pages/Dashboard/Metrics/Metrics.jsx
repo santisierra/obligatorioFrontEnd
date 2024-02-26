@@ -7,7 +7,8 @@ import CaloriasDiarias from "./CaloriasDiarias";
 const Metrics = () => {
 
   return (
-    <div className="container metrics">
+    <div className="container metrics" style={{backgroundColor: '#f0f0f0', padding: '20px'}}>
+      <h2 className="text-start">Metricas</h2>
       <div className="row">
                 <TotalCalorias/>
                 <CaloriasDiarias/>

@@ -44,8 +44,10 @@ const Map =()=>
 
     return (
 
+<div style={{ padding: '20px' }}>
 
-        <MapContainer center={position} zoom={1} scrollWheelZoom={true} style={{ height: '50vh', width: '80vw' }} maxBounds={maxBounds} maxBoundsViscosity={1} minZoom={1} maxZoom={5}>
+
+        <MapContainer center={position} zoom={1} scrollWheelZoom={true} style={{ height: '50vh', width: '100%' }} maxBounds={maxBounds} maxBoundsViscosity={1} minZoom={1} maxZoom={5}>
         <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         {usuariosPorPais.length === 0 ? (
           <p>Cargando usuarios por país...</p>
@@ -61,7 +63,7 @@ const Map =()=>
           })
         )}
       </MapContainer>
-    
+      </div>
 
     )
 };

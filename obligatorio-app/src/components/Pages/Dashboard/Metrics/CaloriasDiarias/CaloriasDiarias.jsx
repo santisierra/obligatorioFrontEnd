@@ -23,7 +23,7 @@ useEffect(() => {
     }
   }
   });
-  setCaloriasDiarias(total);
+  setCaloriasDiarias(total.toFixed(2));
 }, [registrosUsuario, alimentos]);
 
 
@@ -35,13 +35,13 @@ let colorTexto;
 
 switch (true) {
   case caloriasDiarias > userLogged.caloriasDiarias:
-    colorTexto = 'red';
+    colorTexto = 'badge bg-danger';
     break;
   case caloriasDiarias > limite:
-    colorTexto = 'yellow';
+    colorTexto = 'badge bg-warning';
     break;
   default:
-    colorTexto = 'green';
+    colorTexto = 'badge bg-success';
     break;
 }
 
@@ -51,7 +51,8 @@ return (
         <div className="card-body">
           <h5 className="card-title">CALORIAS DE HOY</h5>
           <p className="card-text">
-          <span style={{ color: colorTexto }}>{caloriasDiarias}</span>
+          
+          <span className={colorTexto}>{caloriasDiarias}</span>
 
           </p>
         </div>
@@ -61,7 +62,7 @@ return (
 };
 
 
-
+///<span style={{ color: colorTexto }}>{caloriasDiarias}</span>
 //<span className="badge bg-secondary">{caloriasDiarias}</span>
 
 

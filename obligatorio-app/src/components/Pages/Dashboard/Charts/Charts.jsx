@@ -60,18 +60,18 @@ const caloriasPorFechaUltimaSemana = Array.from(caloriasPorFechaUltimaSemanaMap,
 
 
   return (
-    <div className="container metrics">
-      <h5>METRICS</h5>
+    <div className="container metrics" style={{ padding: '20px'}}>
+      <h2>Controles</h2>
       <div className="row">
-        <div className="col-8">
+        <div className="col-6">
           <div className="card">
             <div className="card-body">CONTADOR DE CONSUMO DE ALIEMNTO</div>
          <Bar data={alimentosConsumidos}/>
           </div>
         </div>
-        <div className="col-4">
+        <div className="col-6">
           <div className="card">
-            <div className="card-body">A PIE CHART WILL BE DISPLAYED HERE</div>
+            <div className="card-body">CALORIAS POR DIA</div>
             <CalsPorFecha data={caloriasPorFechaUltimaSemana}/>
           </div>
         </div>

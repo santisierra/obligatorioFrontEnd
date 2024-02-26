@@ -21,7 +21,7 @@ const TotalCalorias = () => {
       }
     });
   
-    setTotalCalorias(total);
+    setTotalCalorias(total.toFixed(2));
   }, [registrosUsuario,alimentos]);
 
 
