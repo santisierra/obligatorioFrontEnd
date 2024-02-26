@@ -5,6 +5,7 @@ import"leaflet/dist/leaflet.css"
 import { getUsuariosPorPais, getPaises } from '../../../../services/api'; // Ajusta la importación según la estructura de tu proyecto
 import { useEffect, useState} from 'react';
 import { useSelector } from "react-redux";
+import {Icon} from "leaflet";
 
 const Map =()=>
 {
@@ -31,12 +32,15 @@ const Map =()=>
 
 
     const position = [50, -0.09]
-    
     // Define los límites del mapa
     const maxBounds = [
         [-90, -180], // Límite suroeste
         [90, 180]    // Límite noreste
     ];
+    const customIcon = new Icon({
+        iconUrl:require("./../../../../../src/marker.png"),
+        iconSize:[22,38]
+    })
 
     return (
 
@@ -50,7 +54,7 @@ const Map =()=>
             const usuariosRegistrados = Array.isArray(usuariosPorPais) ? usuariosPorPais.find((item) => item.id === pais.id)?.cantidadDeUsuarios : 0;
     
             return (
-              <Marker key={pais.id} position={[pais.latitude, pais.longitude]}>
+              <Marker key={pais.id} position={[pais.latitude, pais.longitude]} icon={customIcon}>
                 <Popup>{`${pais.name}: ${usuariosRegistrados} usuarios registrados`}</Popup>
               </Marker>
             );
