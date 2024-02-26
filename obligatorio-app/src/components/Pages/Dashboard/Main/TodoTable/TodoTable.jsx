@@ -11,10 +11,11 @@ import TodoTableRow from "./TodoTableRow";
 
     
   return (
+    <div style={{ margin: "auto", textAlign: "center" }}>
     <table className="table table-hover">
       <thead>
         <tr>
-          <th scope="col">#</th>
+          <th scope="col">Icono</th>
           <th scope="col">Alimento</th>
           <th scope="col">Cantidad</th>
           <th scope="col">Calorias</th>
@@ -30,6 +31,8 @@ import TodoTableRow from "./TodoTableRow";
         ))}
       </tbody>
     </table>
+    </div>
+
   );
 };
 export default Table;

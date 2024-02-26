@@ -14,6 +14,7 @@ const TodoTableRow = ({ registros,alimentos }) => {
   const [caloriaConsumidas, setCaloriaConsumidas] = useState(0);
   const dispatcher = useDispatch()
 
+  const urlImagenes = "https://calcount.develotion.com/imgs/";
 
   const borrarAlimento = (e) => {
     e.preventDefault();
@@ -38,7 +39,7 @@ const TodoTableRow = ({ registros,alimentos }) => {
 
   return (
     <tr >
-      <th scope="row">{registros.id}</th>
+      <th scope="row">  <img src={urlImagenes+ alimento.id +".png"} alt="" /></th>
       <td>{alimento ? alimento.nombre : 'Alimento no encontrado'}</td>
       <th scope="row">{registros.cantidad+ultimaLetraPorcion}</th>
       <th scope="row">{caloriaConsumidas}</th>
