@@ -7,7 +7,11 @@ import { onLogin } from "../../../../app/slices/userSlice";//importa slide log i
 
 
 import Button from "../../../UI/Button/Button";
+import Alert from "../../../UI/Alert/Alert";
+
 import { getPaises } from "../../../../services/api";
+
+
 const SignUpForm = () => {
 
   const [paises, setPaises] = useState([]);
@@ -22,6 +26,9 @@ const SignUpForm = () => {
   const dispatcher = useDispatch();
   const navigator = useNavigate();
 
+  const [message, setMessage] = useState("");
+const [messageColor, setMessageColor] = useState("danger");
+
   useEffect(() => {
     // Obtener los países al montar el componente
     getPaises()
@@ -33,7 +40,8 @@ const SignUpForm = () => {
       setPaises(paisesArray[1]);
       })
       .catch(error => {
-        console.error('Error al obtener los países:', error);
+        setMessage('Error al obtener los países:',  error.message);
+        setMessageColor("danger");
       });
   }, []);
 
@@ -47,14 +55,15 @@ const SignUpForm = () => {
     const inputPass = inputPassRef.current.value;
     const inputPais = paisSeleccionadoRef.current.value;
     const inputCal = caloriasRef.current.value;
-    console.log(inputCal);
+
     if (inputName == "" || inputPass == "" || inputPais==""||inputCal=="") {
-      alert("Por favor completar los campos"); // TODO
+      setMessage("Complete los campos");
+      setMessageColor("danger");// TODO
     } else {
       registroUsuario(inputName, inputPass,inputPais,inputCal)
         .then((res) => {
-          //setMessage("Inicio de sesion correcto");
-          //setMessageColor("success");
+          setMessage("Usuario registrado");
+          setMessageColor("success");
 
           setTimeout(() => {
             dispatcher(onLogin(res));
@@ -62,16 +71,26 @@ const SignUpForm = () => {
           }, 2000);
         })
         .catch((e) => {
-          //setMessage(e.message);
-          //setMessageColor("danger");
+          setMessage(e.message);
+          setMessageColor("danger");
         });
     }
+    setTimeout(() => {
+      setMessage("");
+    }, 3000);
 
   }
 
   return (
     <>
       <form>
+      {message !== "" ? (
+          <Alert classColor={messageColor} message={message} />
+        ) : (
+          ""
+        )}
+
+
         <label>Username</label>
         <br />
         <input className="form-control" type="text" ref={inputUserNameRef} />

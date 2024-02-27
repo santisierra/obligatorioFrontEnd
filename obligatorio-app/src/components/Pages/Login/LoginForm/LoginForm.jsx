@@ -25,7 +25,8 @@ const LoginForm = () => {
     const inputName = inputUserNameRef.current.value;
     const inputPass = inputPassRef.current.value;
     if (inputName == "" || inputPass == "") {
-      alert("Por favor completar los campos"); // TODO
+        setMessage("Complete los campos");
+        setMessageColor("danger");
     } else {
       login(inputName, inputPass)
         .then((res) => {

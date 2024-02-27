@@ -86,7 +86,15 @@ const registroUsuario = (userName, password, idPais, calorias) => {
       console.log(response)
       if (response.status === 200) {
         return response.json();
-      } else {
+      } 
+      else if (response.status === 409) 
+      {
+        return Promise.reject({
+          message: "Ya existe ese usuario",
+        });      
+      } 
+      else 
+      {
         return Promise.reject({
           message: "Ha ocurrido un error",
         });

@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { useEffect } from "react";
 
+import Alert from "../../../../UI/Alert/Alert";
 
 import Button from "../../../../UI/Button/Button";
 import {postAgregarAlimento } from "../../../../../services/api";
@@ -25,6 +26,8 @@ function AlimentosForm() {
   const [cantidad, setCantidad] = useState('');
   const [ultimaLetraPorcion, SetUnidadSeleccionbado] = useState('');
 
+  const [message, setMessage] = useState("");
+  const [messageColor, setMessageColor] = useState("danger");
 
 
 
@@ -38,16 +41,27 @@ function AlimentosForm() {
       const cantidadTransformada = ultimaLetraPorcion === 'u' ? Math.floor(cant) : cant.toFixed(2);
 
       postAgregarAlimento(idAlimentoSeleccionado, userLogged.id, cantidadTransformada, fecha, userLogged.apiKey).then((response) => {
-       
+
         dispatcher(onAddRegistro({
           "id": response.idRegistro,
           "idAlimento": idAlimentoSeleccionado,
           "idUsuario": userLogged.id,
           "cantidad": cantidadTransformada,
           "fecha": fecha
-      }))//actualizar la lista registros
+      }))
+      
+      setMessage("Registro exitoso");
+      setMessageColor("success");
+
       }); 
     }
+    else{
+      setMessage("No pudo ingresarse la solicitud");
+      setMessageColor("danger");
+    }
+    setTimeout(() => {
+      setMessage("");
+    }, 3000);
 
   };
 
@@ -95,6 +109,13 @@ function AlimentosForm() {
           <Button cta={"Agregar"} onHandleClick={agregarAlimento}></Button>
         </div>
       </form>
+      <div className="col-12 p-0 mt-3">
+      {message !== "" ? (
+          <Alert classColor={messageColor} message={message} />
+        ) : (
+          ""
+        )}
+        </div>
     </div>
   );
 }
