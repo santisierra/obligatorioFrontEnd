@@ -17,21 +17,20 @@ export const registrosSlice = createSlice({
       state.registros = payload;
       state.filteredRegistros = payload;
       state.registrosUltimaSemana = filtrarRegistrosUltimaSemana(payload);
+    // state.registrosUltimaSemana = state.registrosUltimaSemana.filter(registro => registro.id !== payload.idRegistro);
 
     },
     onAddRegistro: (state, action) => {
       const { payload } = action;
       state.registros = [...state.registros, payload];
       state.filteredRegistros = state.registros;
-  //    state.registrosUltimaSemana = filtrarRegistrosUltimaSemana(payload);
-
+      state.registrosUltimaSemana = filtrarRegistrosUltimaSemana(state.registros); // Actualizar los registros de la última semana
     },
     onRemoveRegistro: (state, action) => {
       const { payload } = action;
       state.registros = state.registros.filter(registro => registro.id !== payload.idRegistro);
       state.filteredRegistros = state.filteredRegistros.filter(registro => registro.id !== payload.idRegistro);
       state.registrosUltimaSemana = state.registrosUltimaSemana.filter(registro => registro.id !== payload.idRegistro);
-
     },
     
     onFilterRegistros: (state, action) => {

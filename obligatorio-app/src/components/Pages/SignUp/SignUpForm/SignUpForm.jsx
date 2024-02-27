@@ -56,7 +56,7 @@ const [messageColor, setMessageColor] = useState("danger");
     const inputPais = paisSeleccionadoRef.current.value;
     const inputCal = caloriasRef.current.value;
 
-    if (inputName == "" || inputPass == "" || inputPais==""||inputCal=="") {
+    if (inputName === "" || inputPass === "" || inputPais===""||inputCal==="") {
       setMessage("Complete los campos");
       setMessageColor("danger");
     } else {
@@ -70,9 +70,10 @@ const [messageColor, setMessageColor] = useState("danger");
             navigator("/dashboard");//Navega a tal lado
           }, 2000);
         })
-        .catch((e) => {
-          setMessage(e.message);
+        .catch((error) => {
+          setMessage(error.message);
           setMessageColor("danger");
+
         });
     }
     setTimeout(() => {

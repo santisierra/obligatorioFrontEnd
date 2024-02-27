@@ -41,18 +41,6 @@ registrosUltimaSemana.forEach(registro => {
 const caloriasPorFechaUltimaSemana = Array.from(caloriasPorFechaUltimaSemanaMap, ([fecha, calorias]) => ({ fecha, calorias }));
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     const options = {
       chart: {
         type: 'line',
@@ -100,7 +88,6 @@ const caloriasPorFechaUltimaSemana = Array.from(caloriasPorFechaUltimaSemanaMap,
   
     const series = [{
       data: caloriasPorFechaUltimaSemana.map(item => item.calorias)
-      
     }];
   
     return (

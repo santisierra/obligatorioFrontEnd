@@ -82,28 +82,25 @@ const registroUsuario = (userName, password, idPais, calorias) => {
     }),
   })
     .then((response) => {
-      console.log(response)
       if (response.status === 200) {
+
         return response.json();
-      } 
-      else if (response.status === 409) 
-      {
+      } else if (response.status === 409) {
+
         return Promise.reject({
           message: "Ya existe ese usuario",
-        });      
-      } 
-      else 
-      {
+        });
+      } else {
         return Promise.reject({
-          message: "Ha ocurrido un error",
+          message: "Ha ocurrido un error en el servidor",
         });
       }
     })
-    .catch((e) =>
-      Promise.reject({
-        message: "Ha ocurrido un error",
-      })
-    );
+    .catch((error) => {
+      return Promise.reject({
+        message: error.message,
+      });
+    });
 };
 const getRegistors = (userId,apiKey) => {
 
