@@ -39,7 +39,9 @@ const TodoTableRow = ({ registros,alimentos }) => {
 
   return (
     <tr >
-      <th scope="row">  <img src={urlImagenes+ alimento.imagen +".png"} alt="" /></th>
+      <th scope="row">  {alimento && alimento.imagen && (
+    <img src={urlImagenes + alimento.imagen + ".png"} alt="" />
+  )}</th>
       <td>{alimento ? alimento.nombre : 'Alimento no encontrado'}</td>
       <th scope="row">{registros.cantidad+ultimaLetraPorcion}</th>
       <th scope="row">{caloriaConsumidas}</th>
