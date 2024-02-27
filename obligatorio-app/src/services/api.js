@@ -26,7 +26,6 @@ const login = (userName, password) => {
     );
 };
 const getPaises = () => {
-  // return fetch(`https://jsonplaceholder.typicode.com/todos?userId=${userId}`)
   return fetch(`https://calcount.develotion.com/paises.php`)
     .then((response) => {
       if (response.status === 200) {
@@ -184,7 +183,6 @@ const eliminarRegistro = (idRegistro,idUser, apiKey) => {
   });
 };
 const getAlimentos = (userId,apiKey) => {
-  // return fetch(`https://jsonplaceholder.typicode.com/todos?userId=${userId}`)
   const headers = new Headers();
   headers.append("apikey", `${apiKey}`);
   headers.append("iduser", `${userId}`);
@@ -211,41 +209,6 @@ const getAlimentos = (userId,apiKey) => {
 
 
 
-const fakeLogin = (userName, password) => {
-  return Promise.resolve({
-    codigo: 200,
-    apiKey: "074c115059a0bb76ff71b12da3d5a8e4",
-    id: 37,
-    caloriasDiarias: 2000,
-  });
-};
-
-const getTodos = (userId) => {
-  // return fetch(`https://jsonplaceholder.typicode.com/todos?userId=${userId}`)
-  return fetch(`https://jsonplaceholder.typicode.com/todos?userId=1`)
-    .then((response) => {
-      if (response.status === 200) {
-        return response.json();
-      } else {
-        return Promise.reject({
-          message: "Ha ocurrido un error",
-        });
-      }
-    })
-    .catch((e) =>
-      Promise.reject({
-        message: "Ha ocurrido un error",
-      })
-    );
-};
-
-const saveToDo = (toDo) => {
-  return Promise.resolve({
-    codigo: 200,
-    id: Math.floor(Math.random() * 10) * 10,
-  });
-};
-
 export {registroUsuario,
         login, 
         getPaises,
@@ -254,9 +217,4 @@ export {registroUsuario,
         postAgregarAlimento,
         eliminarRegistro,
         getAlimentos,
-
-
-        getTodos, 
-        saveToDo,
-        fakeLogin, 
       };

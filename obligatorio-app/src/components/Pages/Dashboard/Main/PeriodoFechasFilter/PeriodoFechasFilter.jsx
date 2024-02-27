@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { onFilterRegistros } from "../../../../../app/slices/registrosAlimentosUsuarioSlice";
 
-const TodoFilter = () => {
+const PeriodoFechasFilter = () => {
   const selectRef = useRef();
   const dispatcher = useDispatch();
 
@@ -22,4 +22,4 @@ const TodoFilter = () => {
   );
 };
 
-export default TodoFilter;
+export default PeriodoFechasFilter;

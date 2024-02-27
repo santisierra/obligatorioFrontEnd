@@ -1,13 +1,13 @@
 import { useSelector } from "react-redux";
-import "./TodoTable.css";
-import TodoTableRow from "./TodoTableRow";
+import "./RegistrosTable.css";
+import RegistroTableRow from "./RegistroTableRow";
 
 
-  const Table = () => {
+  const RegistrosTable = () => {
     //const registros = useSelector((state) => state.registrosSlice.registros);
     const alimentos = useSelector((state) => state.alimetosSlice.alimentos);
 
-    const filteredToDos = useSelector((store) => store.registrosSlice.filteredRegistros);
+    const filteredRegistros = useSelector((store) => store.registrosSlice.filteredRegistros);
 
     
   return (
@@ -24,8 +24,8 @@ import TodoTableRow from "./TodoTableRow";
         </tr>
       </thead>
       <tbody>
-      {filteredToDos.map((registros) => (
-      <TodoTableRow registros={registros} 
+      {filteredRegistros.map((registros) => (
+      <RegistroTableRow registros={registros} 
                     alimentos={alimentos}
                     key={registros.id}/>
         ))}
@@ -35,8 +35,4 @@ import TodoTableRow from "./TodoTableRow";
 
   );
 };
-export default Table;
-/*{registros.map((registros) => (
-  <TodoTableRow registros={registros} 
-                alimentos={alimentos} 
-                key={registros.id}*/
+export default RegistrosTable;

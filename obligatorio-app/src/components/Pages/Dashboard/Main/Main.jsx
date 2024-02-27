@@ -1,16 +1,15 @@
-import TodoTable from "./TodoTable";
-import TodoFilter from "./TodoFilter";
-import AlimentosForm from "./AlimentosForm";
+import RegistrosTable from "./RegistrosTable";
+import PeriodoFechasFilter from "./PeriodoFechasFilter";
 
 const Main = () => {
   return (
     <main>
       <div className="grid">
 
-        <TodoFilter />
+        <PeriodoFechasFilter />
       </div>
       <br />
-      <TodoTable />
+      <RegistrosTable />
     </main>
   );
 };

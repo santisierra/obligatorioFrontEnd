@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { onRemoveRegistro } from "../../../../../../app/slices/registrosAlimentosUsuarioSlice";
 
 
-const TodoTableRow = ({ registros,alimentos }) => {
+const RegistroTableRow = ({ registros,alimentos }) => {
   const userLogged = useSelector((store) => store.userSlice.userLogged);
   const alimento = alimentos.find(alimento => alimento.id === registros.idAlimento);
   // Obtener la última letra del campo porcion del alimento
@@ -54,5 +54,5 @@ const TodoTableRow = ({ registros,alimentos }) => {
   );
 };
 
-export default TodoTableRow;
+export default RegistroTableRow;
 //      <th scope="row">{caloriaConsumidas}</th>

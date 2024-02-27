@@ -1,7 +1,30 @@
 import ReactApexChart from "react-apexcharts";
+import {useSelector} from "react-redux"
 
 
-const Bar = ({ data }) => {
+const Bar = () => {
+
+
+
+    const registros = useSelector((state) => state.registrosSlice.registros);
+    const alimentos = useSelector((state) => state.alimetosSlice.alimentos);  
+  
+    // Función para contar cuántas veces un alimento ha sido consumido
+    const contarConsumoAlimento = (registros, alimentoId) => {
+      return registros.filter(registro => registro.idAlimento === alimentoId).length;
+    };
+  
+    // Obtener el consumo de cada alimento
+    const alimentosConsumidos = alimentos.map(alimento => ({
+      id: alimento.id,
+      nombre: alimento.nombre,
+      vecesConsumido: contarConsumoAlimento(registros, alimento.id)
+    })).
+    //filtra los aliemntos que si consumio
+    filter(alimento => alimento.vecesConsumido > 0);
+
+
+
     const options = {
       chart: {
         type: 'bar',
@@ -17,7 +40,7 @@ const Bar = ({ data }) => {
         enabled: false
       },
       xaxis: {
-        categories: data.map(item => item.nombre),
+        categories: alimentosConsumidos.map(item => item.nombre),
         labels: {
             formatter: function(val) {
                 return val.toFixed(0);
@@ -37,7 +60,7 @@ const Bar = ({ data }) => {
 }
   
     const series = [{
-      data: data.map(item => item.vecesConsumido)
+      data: alimentosConsumidos.map(item => item.vecesConsumido)
     }];
   
     return (

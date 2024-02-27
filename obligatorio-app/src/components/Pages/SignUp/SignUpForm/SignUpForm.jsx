@@ -58,7 +58,7 @@ const [messageColor, setMessageColor] = useState("danger");
 
     if (inputName == "" || inputPass == "" || inputPais==""||inputCal=="") {
       setMessage("Complete los campos");
-      setMessageColor("danger");// TODO
+      setMessageColor("danger");
     } else {
       registroUsuario(inputName, inputPass,inputPais,inputCal)
         .then((res) => {

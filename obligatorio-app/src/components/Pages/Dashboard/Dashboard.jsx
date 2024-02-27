@@ -3,7 +3,7 @@ import Charts from "./Charts";
 import "./Dashboard.css";
 import Main from "./Main";
 import Metrics from "./Metrics/Metrics";
-import { getAlimentos, getRegistors, getTodos } from "../../../services/api";
+import { getAlimentos, getRegistors } from "../../../services/api";
 import { useSelector, useDispatch } from "react-redux";
 import { onLoadRegistros } from "../../../app/slices/registrosAlimentosUsuarioSlice";
 import ContadorNuevoPlan from "../Dashboard/ContadorNuevoPlan";

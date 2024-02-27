@@ -25,6 +25,9 @@ function AlimentosForm() {
 
   const [cantidad, setCantidad] = useState('');
   const [ultimaLetraPorcion, SetUnidadSeleccionbado] = useState('');
+  const [nombreMedida, SetNombreMedida] = useState('');
+
+
 
   const [message, setMessage] = useState("");
   const [messageColor, setMessageColor] = useState("danger");
@@ -74,11 +77,31 @@ function AlimentosForm() {
   const handleAlimentoChange = (event) => {
     setAliemtoSeleccionado(event.target.value);
     const alimento = alimentos.find(alimento => alimento.id === parseInt(event.target.value));
-    SetUnidadSeleccionbado ( alimento ? alimento.porcion.slice(-1) : '');
+    const ultLetra =  alimento ? alimento.porcion.slice(-1) : '';
+    SetUnidadSeleccionbado (ultLetra);
+    swithNombreMedida(ultLetra);
   };
 
   const handleCantidadChange = (event) => {
     setCantidad(event.target.value);
+  };
+
+  const swithNombreMedida = (s) =>
+  {
+    switch (s) {
+      case "u":
+        SetNombreMedida("Unidades")
+        break;
+        case "g":
+          SetNombreMedida("Gramos")
+          break;
+          case "m":
+            SetNombreMedida("Mililitros")
+            break;
+      default:
+        SetNombreMedida("Unidad no encontrada")
+        break;
+    }
   };
 
 
@@ -98,8 +121,8 @@ function AlimentosForm() {
           </select>
         </div>
         <div className="col">
-          <label>Cantidad</label>
-          <input className="form-control" type="number" value={cantidad} onChange={handleCantidadChange} />
+          <label>Cantidad en {nombreMedida}</label>
+          <input className="form-control" type="number" placeholder={nombreMedida} value={cantidad} onChange={handleCantidadChange} />
         </div>
         <div className="col">
           <label className="col-12">Fecha</label>
